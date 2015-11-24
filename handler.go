@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
 	"io/ioutil"
+	"github.com/gorilla/mux"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -15,7 +15,7 @@ func GetDeviceByIPHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	ipaddr := vars["ipaddr"]
 
-  w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 
@@ -93,7 +93,8 @@ func IsValidIPAddress(ipaddr string) (valid bool) {
 
 func AddHandlers() {
 	h := mux.NewRouter()
-	h.HandleFunc("/ipalloc/view/{ipaddr:1.2.[0-9][0-9]*.[0-9][0-9]*}", GetDeviceByIPHandler)
-	h.HandleFunc("/ipalloc/add/", AllocateIPHandler)
-	http.ListenAndServe(":8080", h)
+	h.HandleFunc("/ipalloc/{ipaddr:1.2.[0-9][0-9]*.[0-9][0-9]*}",
+		GetDeviceByIPHandler).Methods("GET")
+	h.HandleFunc("/ipalloc", AllocateIPHandler).Methods("POST")
+	http.ListenAndServe(":8123", h)
 }

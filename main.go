@@ -5,6 +5,6 @@ import (
 )
 
 func main() {
-	fmt.Println("ipalloc service, listening on 8080....")
+	fmt.Println("ipalloc service, listening on 8123....")
 	AddHandlers()
 }

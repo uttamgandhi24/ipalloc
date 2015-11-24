@@ -13,7 +13,7 @@ type Device struct {
 	IPAddress string `bson:"IPAddress"`
 }
 
-const kIPMapFileName string = "data/ip_map"
+const kIPMapFileName string = "data/ip_map.txt"
 
 func GetDeviceByIP(ipaddr string) (device Device, err error) {
 	lines := ReadFile(kIPMapFileName)
